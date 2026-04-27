@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <!-- Meta tags específicos para iPhone / Móvil -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Magia y Color</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: #f8fafc;
+            -webkit-tap-highlight-color: transparent; /* Quita el cuadro gris al tocar en iPhone */
+        }
+
+        /* Fondos animados */
+        .bg-patron {
+            background-image: radial-gradient(#cbd5e1 2px, transparent 2px);
+            background-size: 30px 30px;
+        }
+
+        /* Animaciones CSS */
+        .rayo { stroke-dasharray: 10; animation: moverRayo 1s linear infinite; }
+        .rayo-rapido { stroke-dasharray: 15; animation: moverRayo 0.6s linear infinite; }
+        .rayo-luz { stroke-dasharray: 15; animation: moverRayo 1s linear infinite; }
+        .rayo-luz-lento { stroke-dasharray: 15; animation: moverRayo 2s linear infinite; }
+        
+        @keyframes moverRayo { from { stroke-dashoffset: 100; } to { stroke-dashoffset: 0; } }
+
+        .flotar { animation: flotacion 3s ease-in-out infinite; }
+        @keyframes flotacion { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+
+        .comer-anim { animation: masticar 0.3s alternate 4; }
+        @keyframes masticar { 0% { transform: scale(1); } 100% { transform: scale(1.1) rotate(5deg); } }
+
+        .pop-up { animation: popUpAnim 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
+        @keyframes popUpAnim { 0% { transform: scale(0); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+
+        /* Estilos de botones interactivos */
+        .btn-objeto { transition: all 0.2s; }
+        .btn-objeto:active { transform: scale(0.95); }
+        .btn-activo { border-color: #d946ef; background-color: #fae8ff; box-shadow: 0 10px 15px -3px rgba(217, 70, 239, 0.3); }
+
+        .btn-opcion { transition: all 0.2s ease; }
+        .btn-opcion:active { transform: scale(0.95); }
+
+        /* Barra de navegación iOS inferior */
+        .tab-content { display: none; animation: fadeIn 0.3s; }
+        .tab-content.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .nav-item { color: #94a3b8; transition: all 0.2s; }
+        .nav-item.active { color: #8b5cf6; transform: scale(1.1); font-weight: 900;}
+    </style>
+</head>
+<body class="bg-patron pb-[calc(5rem+env(safe-area-inset-bottom))]">
+
+    <!-- CONTENEDOR PRINCIPAL -->
+    <main id="app-container" class="p-4 max-w-lg mx-auto">
+        
+        <!-- ========================================== -->
+        <!-- PESTAÑA 1: LA LUZ -->
+        <!-- ========================================== -->
+        <section id="tab-luz" class="tab-content active">
+            <header class="text-center mb-8 mt-4">
+                <h1 class="flotar text-4xl font-black text-amber-500 drop-shadow-sm mb-2">¡Magia de Luz! 🌟</h1>
+                <p class="text-lg font-bold text-sky-700">¿Cómo viaja la luz? ¡Descubre sus trucos!</p>
+            </header>
+
+            <div class="space-y-6">
+                <!-- Espejo -->
+                <article class="bg-white rounded-3xl p-5 border-4 border-amber-300 shadow-lg">
+                    <h2 class="text-xl font-black text-amber-500 mb-1">El Efecto Espejo 🪞</h2>
+                    <div class="w-full h-40 bg-slate-50 rounded-2xl mb-3 relative overflow-hidden border-2 border-slate-200">
+                        <svg viewBox="0 0 200 150" class="w-full h-full">
+                            <rect x="20" y="120" width="160" height="10" fill="#cbd5e1" rx="5" />
+                            <path d="M 40 20 L 90 120" stroke="#fbbf24" stroke-width="4" stroke-linecap="round" class="rayo-luz" />
+                            <path d="M 70 20 L 100 120" stroke="#fbbf24" stroke-width="4" stroke-linecap="round" class="rayo-luz" />
+                            <path d="M 90 120 L 140 20" stroke="#f59e0b" stroke-width="4" stroke-linecap="round" class="rayo-luz" />
+                            <path d="M 100 120 L 170 20" stroke="#f59e0b" stroke-width="4" stroke-linecap="round" class="rayo-luz" />
+                        </svg>
+                    </div>
+                    <div class="bg-amber-50 rounded-xl p-3 border-2 border-amber-200">
+                        <p class="text-amber-800 font-black text-sm mb-1">💡 ¿Por qué pasa esto?</p>
+                        <p class="text-amber-700 text-xs font-bold">Los rayos viajan ordenados. Al chocar con algo súper liso, rebotan juntitos. ¡Por eso ves tu cara igualita!</p>
+                    </div>
+                </article>
+
+                <!-- Pelota Loca -->
+                <article class="bg-white rounded-3xl p-5 border-4 border-emerald-400 shadow-lg">
+                    <h2 class="text-xl font-black text-emerald-500 mb-1">La Pelota Loca 🎾</h2>
+                    <div class="w-full h-40 bg-slate-50 rounded-2xl mb-3 relative overflow-hidden border-2 border-slate-200">
+                        <svg viewBox="0 0 200 150" class="w-full h-full">
+                            <path d="M 20 120 Q 30 110 40 120 T 60 120 T 80 115 T 100 125 T 120 115 T 140 120 T 160 110 T 180 120" fill="none" stroke="#6ee7b7" stroke-width="10" stroke-linecap="round"/>
+                            <path d="M 40 20 L 80 115" stroke="#fbbf24" stroke-width="4" stroke-linecap="round" class="rayo-luz" />
+                            <path d="M 80 115 L 30 40" stroke="#f59e0b" stroke-width="4" stroke-linecap="round" class="rayo-luz" />
+                            <path d="M 70 20 L 110 120" stroke="#fbbf24" stroke-width="4" stroke-linecap="round" class="rayo-luz" />
+                            <path d="M 110 120 L 160 30" stroke="#f59e0b" stroke-width="4" stroke-linecap="round" class="rayo-luz" />
+                        </svg>
+                    </div>
+                    <div class="bg-emerald-50 rounded-xl p-3 border-2 border-emerald-200">
+                        <p class="text-emerald-800 font-black text-sm mb-1">💡 ¿Por qué pasa esto?</p>
+                        <p class="text-emerald-700 text-xs font-bold">Las cosas con baches (como tu ropa) asustan a los rayos de luz y rebotan a lo loco hacia todas partes.</p>
+                    </div>
+                </article>
+
+                <!-- El Agua -->
+                <article class="bg-white rounded-3xl p-5 border-4 border-sky-400 shadow-lg">
+                    <h2 class="text-xl font-black text-sky-500 mb-1">El Truco del Agua 💧</h2>
+                    <div class="w-full h-40 bg-slate-50 rounded-2xl mb-3 relative overflow-hidden border-2 border-slate-200">
+                        <svg viewBox="0 0 200 150" class="w-full h-full">
+                            <rect x="0" y="75" width="200" height="75" fill="#bae6fd" opacity="0.6"/>
+                            <path d="M 0 75 Q 50 80 100 75 T 200 75" fill="none" stroke="#38bdf8" stroke-width="3" />
+                            <line x1="40" y1="10" x2="100" y2="75" stroke="#ea580c" stroke-width="8" stroke-linecap="round" />
+                            <line x1="100" y1="75" x2="130" y2="130" stroke="#ea580c" stroke-width="8" stroke-linecap="round" />
+                            <path d="M 40 10 L 100 75" stroke="#fbbf24" stroke-width="3" class="rayo-luz" fill="none"/>
+                            <path d="M 100 75 L 135 140" stroke="#fbbf24" stroke-width="3" class="rayo-luz-lento" fill="none"/>
+                        </svg>
+                    </div>
+                    <div class="bg-sky-50 rounded-xl p-3 border-2 border-sky-200">
+                        <p class="text-sky-800 font-black text-sm mb-1">💡 ¿Por qué pasa esto?</p>
+                        <p class="text-sky-700 text-xs font-bold">El agua frena la luz. Al entrar, la luz viaja más lento y su camino "se dobla". ¡Por eso el lápiz parece roto!</p>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+
+        <!-- ========================================== -->
+        <!-- PESTAÑA 2: LOS COLORES -->
+        <!-- ========================================== -->
+        <section id="tab-colores" class="tab-content">
+            <header class="text-center mb-8 mt-4">
+                <h1 class="flotar text-4xl font-black text-fuchsia-500 drop-shadow-sm mb-2">Secreto de Colores 🌈</h1>
+                <p class="text-lg font-bold text-purple-700">¡Los objetos comen colores!</p>
+            </header>
+
+            <!-- Mini Lab -->
+            <div class="bg-white rounded-3xl p-5 border-4 border-fuchsia-400 shadow-xl mb-6">
+                <h2 class="text-xl font-black text-center text-fuchsia-600 mb-4">Laboratorio Monstruo 🔬</h2>
+                
+                <div class="w-full h-48 bg-slate-900 rounded-2xl mb-4 relative overflow-hidden border-2 border-slate-700 flex justify-center items-center">
+                    <svg viewBox="0 0 400 300" class="w-full h-full">
+                        <path d="M 0 50 L 150 140" stroke="#ef4444" stroke-width="6" class="rayo" /> 
+                        <path d="M 0 50 L 160 150" stroke="#22c55e" stroke-width="6" class="rayo" /> 
+                        <path d="M 0 50 L 150 160" stroke="#3b82f6" stroke-width="6" class="rayo" /> 
+                        <path d="M 0 50 L 140 170" stroke="#eab308" stroke-width="6" class="rayo" /> 
+
+                        <g id="svg-objeto-grupo" transform="translate(180, 150)">
+                            <text id="svg-emoji" x="0" y="20" font-size="70" text-anchor="middle" class="flotar">🌳</text>
+                            <text id="svg-nam" x="0" y="-40" fill="#f43f5e" font-size="28" font-weight="black" text-anchor="middle" opacity="0">¡ÑAM!</text>
+                        </g>
+
+                        <g id="rayos-rebote">
+                            <path id="rebote-rojo" d="M 210 140 L 350 50" stroke="#ef4444" stroke-width="8" class="rayo-rapido" opacity="0" />
+                            <path id="rebote-verde" d="M 200 150 L 350 70" stroke="#22c55e" stroke-width="8" class="rayo-rapido" opacity="1" />
+                            <path id="rebote-azul" d="M 210 160 L 350 90" stroke="#3b82f6" stroke-width="8" class="rayo-rapido" opacity="0" />
+                            <path id="rebote-amarillo" d="M 200 170 L 350 110" stroke="#eab308" stroke-width="8" class="rayo-rapido" opacity="0" />
+                        </g>
+
+                        <g transform="translate(330, 70) scale(1.2)">
+                            <path d="M 0 0 Q 20 -20 40 0 Q 20 20 0 0 Z" fill="white" stroke="#64748b" stroke-width="3"/>
+                            <circle id="color-ojo" cx="20" cy="0" r="8" fill="#22c55e"/>
+                        </g>
+                    </svg>
+                </div>
+
+                <div class="grid grid-cols-4 gap-2 mb-4">
+                    <button onclick="cambiarObjeto('hoja')" id="btn-hoja" class="btn-objeto btn-activo p-2 rounded-xl border-2 border-slate-200 bg-slate-50 flex flex-col items-center">
+                        <span class="text-3xl">🌳</span>
+                    </button>
+                    <button onclick="cambiarObjeto('platano')" id="btn-platano" class="btn-objeto p-2 rounded-xl border-2 border-slate-200 bg-slate-50 flex flex-col items-center">
+                        <span class="text-3xl">🍌</span>
+                    </button>
+                    <button onclick="cambiarObjeto('nieve')" id="btn-nieve" class="btn-objeto p-2 rounded-xl border-2 border-slate-200 bg-slate-50 flex flex-col items-center">
+                        <span class="text-3xl">⛄</span>
+                    </button>
+                    <button onclick="cambiarObjeto('gato')" id="btn-gato" class="btn-objeto p-2 rounded-xl border-2 border-slate-200 bg-slate-50 flex flex-col items-center">
+                        <span class="text-3xl">🐈‍⬛</span>
+                    </button>
+                </div>
+
+                <div id="caja-explicacion" class="p-4 rounded-xl bg-emerald-100 border-2 border-emerald-300 text-emerald-800 font-bold text-sm text-center pop-up">
+                    La hoja se come el rojo, azul y amarillo... ¡Pero le da asco el <strong>VERDE</strong> y lo escupe hacia tus ojos!
+                </div>
+            </div>
+
+            <!-- Resumen Experimentos -->
+            <div class="bg-orange-100 p-5 rounded-3xl border-4 border-orange-300">
+                <h3 class="font-black text-orange-600 text-lg mb-2">👕 ¡Pruébalo en casa!</h3>
+                <p class="text-orange-800 text-sm font-bold">Pon una playera BLANCA y una NEGRA bajo el sol.</p>
+                <p class="text-orange-800 text-sm mt-2">La negra se "come" la luz y se calienta 🔥. La blanca escupe la luz y se mantiene fresca ❄️.</p>
+            </div>
+        </section>
+
+
+        <!-- ========================================== -->
+        <!-- PESTAÑA 3: JUEGOS (QUIZ) -->
+        <!-- ========================================== -->
+        <section id="tab-juegos" class="tab-content">
+            <header class="text-center mb-8 mt-4">
+                <h1 class="flotar text-4xl font-black text-indigo-500 drop-shadow-sm mb-2">Misión Secreta 🕵️‍♀️</h1>
+                <p class="text-lg font-bold text-slate-600">¡Gana puntos de científico!</p>
+            </header>
+
+            <div class="space-y-6">
+                <!-- Pregunta 1 -->
+                <div class="p-5 bg-indigo-50 rounded-2xl border-2 border-indigo-200">
+                    <p class="font-black text-indigo-900 mb-3 leading-tight">1. Quieres hacer señales de luz al vecino. ¿Qué usas?</p>
+                    <div class="grid grid-cols-1 gap-2" id="q1">
+                        <button onclick="verificar(this, 'q1', true)" class="btn-opcion p-3 rounded-xl border-2 border-slate-300 bg-white text-slate-700 font-bold hover:border-amber-400">Espejo súper liso 🪞</button>
+                        <button onclick="verificar(this, 'q1', false)" class="btn-opcion p-3 rounded-xl border-2 border-slate-300 bg-white text-slate-700 font-bold">Manta de lana 🧶</button>
+                    </div>
+                </div>
+
+                <!-- Pregunta 2 -->
+                <div class="p-5 bg-indigo-50 rounded-2xl border-2 border-indigo-200">
+                    <p class="font-black text-indigo-900 mb-3 leading-tight">2. En la piscina tus piernas se ven chuecas por...</p>
+                    <div class="grid grid-cols-1 gap-2" id="q2">
+                        <button onclick="verificar(this, 'q2', false)" class="btn-opcion p-3 rounded-xl border-2 border-slate-300 bg-white text-slate-700 font-bold">El agua las encoge 😱</button>
+                        <button onclick="verificar(this, 'q2', true)" class="btn-opcion p-3 rounded-xl border-2 border-slate-300 bg-white text-slate-700 font-bold">Refracción (la luz se dobla) 💧</button>
+                    </div>
+                </div>
+
+                <!-- Pregunta 3 -->
+                <div class="p-5 bg-indigo-50 rounded-2xl border-2 border-indigo-200">
+                    <p class="font-black text-indigo-900 mb-3 leading-tight">3. Si tu camiseta es AZUL, ¿qué le hace a la luz?</p>
+                    <div class="grid grid-cols-1 gap-2" id="q3">
+                        <button onclick="verificar(this, 'q3', true)" class="btn-opcion p-3 rounded-xl border-2 border-slate-300 bg-white text-slate-700 font-bold leading-tight">Se traga todo y escupe azul 🔵</button>
+                        <button onclick="verificar(this, 'q3', false)" class="btn-opcion p-3 rounded-xl border-2 border-slate-300 bg-white text-slate-700 font-bold leading-tight">Es agua de cielo mágico ✨</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="h-10"></div> <!-- Espacio final -->
+        </section>
+
+    </main>
+
+    <!-- BARRA DE NAVEGACIÓN ESTILO iOS -->
+    <nav class="fixed bottom-0 w-full bg-white/90 backdrop-blur-md border-t border-slate-200 pb-[env(safe-area-inset-bottom)] z-50">
+        <ul class="flex justify-around items-center h-16 px-2">
+            <li>
+                <button onclick="abrirTab('luz', this)" class="nav-item active flex flex-col items-center p-2 w-20">
+                    <span class="text-2xl mb-1">🪄</span>
+                    <span class="text-[10px] uppercase font-black tracking-widest">Luz</span>
+                </button>
+            </li>
+            <li>
+                <button onclick="abrirTab('colores', this)" class="nav-item flex flex-col items-center p-2 w-20">
+                    <span class="text-2xl mb-1">🌈</span>
+                    <span class="text-[10px] uppercase font-black tracking-widest">Color</span>
+                </button>
+            </li>
+            <li>
+                <button onclick="abrirTab('juegos', this)" class="nav-item flex flex-col items-center p-2 w-20">
+                    <span class="text-2xl mb-1">🎮</span>
+                    <span class="text-[10px] uppercase font-black tracking-widest">Juego</span>
+                </button>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- SCRIPTS MÁGICOS -->
+    <script>
+        // --- NAVEGACIÓN TABS ---
+        function abrirTab(tabId, btn) {
+            // Ocultar todos los tabs
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+            // Mostrar el tab seleccionado
+            document.getElementById('tab-' + tabId).classList.add('active');
+            
+            // Actualizar botones de la barra
+            document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
+            btn.classList.add('active');
+            
+            // Scroll arriba
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // --- LABORATORIO DE COLORES ---
+        const objetos = {
+            hoja: {
+                emoji: '🌳', rebota: ['verde'], colorOjo: '#22c55e',
+                bg: 'bg-emerald-100', borde: 'border-emerald-300', texto: 'text-emerald-800',
+                msj: 'La hoja se come casi todos... ¡Pero escupe el <strong>VERDE</strong> a tus ojos!'
+            },
+            platano: {
+                emoji: '🍌', rebota: ['amarillo'], colorOjo: '#eab308',
+                bg: 'bg-yellow-100', borde: 'border-yellow-300', texto: 'text-yellow-800',
+                msj: 'El plátano se traga la luz, ¡pero hace rebotar el <strong>AMARILLO</strong>!'
+            },
+            nieve: {
+                emoji: '⛄', rebota: ['rojo', 'verde', 'azul', 'amarillo'], colorOjo: '#ffffff',
+                bg: 'bg-sky-100', borde: 'border-sky-300', texto: 'text-sky-800',
+                msj: '¡Las cosas blancas NO tienen hambre! Rebotan <strong>TODOS</strong> los colores juntos.'
+            },
+            gato: {
+                emoji: '🐈‍⬛', rebota: [], colorOjo: '#0f172a',
+                bg: 'bg-slate-200', borde: 'border-slate-400', texto: 'text-slate-800',
+                msj: '¡Glotón! Las cosas negras se <strong>comen TODOS</strong> los colores y no rebotan nada.'
+            }
+        };
+
+        function cambiarObjeto(tipo) {
+            const data = objetos[tipo];
+            
+            // Botones visuales
+            document.querySelectorAll('.btn-objeto').forEach(b => b.classList.remove('btn-activo'));
+            document.getElementById(`btn-${tipo}`).classList.add('btn-activo');
+
+            // Animar Emoji y ÑAM
+            const emojiEl = document.getElementById('svg-emoji');
+            const namEl = document.getElementById('svg-nam');
+            
+            emojiEl.textContent = data.emoji;
+            emojiEl.classList.remove('flotar');
+            emojiEl.classList.add('comer-anim');
+            
+            namEl.style.opacity = (tipo !== 'nieve') ? '1' : '0';
+            if(tipo !== 'nieve') { namEl.classList.add('pop-up'); }
+
+            // Rayos rebotando
+            ['rojo', 'verde', 'azul', 'amarillo'].forEach(c => {
+                document.getElementById(`rebote-${c}`).style.opacity = data.rebota.includes(c) ? '1' : '0';
+            });
+
+            document.getElementById('color-ojo').setAttribute('fill', data.colorOjo);
+
+            // Mensaje
+            const caja = document.getElementById('caja-explicacion');
+            caja.classList.remove('pop-up');
+            void caja.offsetWidth; // Restart anim
+            caja.classList.add('pop-up');
+            caja.className = `p-4 rounded-xl font-bold text-sm text-center pop-up ${data.bg} ${data.borde} ${data.texto}`;
+            caja.innerHTML = data.msj;
+
+            setTimeout(() => {
+                emojiEl.classList.remove('comer-anim');
+                emojiEl.classList.add('flotar');
+                namEl.style.opacity = '0';
+                namEl.classList.remove('pop-up');
+            }, 1200);
+        }
+
+        // --- SISTEMA DEL QUIZ (JUEGOS) ---
+        function verificar(boton, idPregunta, esCorrecta) {
+            const contenedor = document.getElementById(idPregunta);
+            const botones = contenedor.querySelectorAll('button');
+
+            if (esCorrecta) {
+                boton.className = "btn-opcion p-3 rounded-xl border-4 border-green-500 bg-green-400 text-white font-black transform scale-105";
+                if (!boton.innerHTML.includes('✅')) boton.innerHTML = boton.innerHTML.replace('❌', '') + ' ✅ ¡SÍ!';
+                
+                botones.forEach(b => {
+                    if (b !== boton) {
+                        b.disabled = true;
+                        b.className = "btn-opcion p-3 rounded-xl border-2 border-slate-200 bg-slate-100 text-slate-400 font-bold opacity-50";
+                    }
+                });
+            } else {
+                boton.className = "btn-opcion p-3 rounded-xl border-4 border-red-400 bg-red-100 text-red-600 font-black";
+                if (!boton.innerHTML.includes('❌')) boton.innerHTML += ' ❌ Ups!';
+                
+                boton.animate([
+                    { transform: 'translateX(0)' }, { transform: 'translateX(-5px)' },
+                    { transform: 'translateX(5px)' }, { transform: 'translateX(0)' }
+                ], { duration: 300 });
+            }
+        }
+    </script>
+</body>
+</html>
